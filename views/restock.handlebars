@@ -1,0 +1,31 @@
+{{!-- views/restock.handlebars --}}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restock</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Restock Items</h1>
+        <form method="POST" action="/restock/restock">
+            <div class="form-group">
+                <label for="productId">Select Product</label>
+                <select class="form-control" id="productId" name="productId">
+                    {{#each products}}
+                    <option value="{{this.id}}">{{this.name}} - Current Quantity: {{this.quantity}}</option>
+                    {{else}}
+                    <option value="">No products available</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="quantity">Quantity to Add</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Restock</button>
+        </form>
+    </div>
+</body>
+</html>
