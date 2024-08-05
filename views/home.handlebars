@@ -1,0 +1,85 @@
+{{!-- views/home.handlebars --}}
+{{!-- Ensure to pass title, orders, and products to this template --}}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Welcome, {{user.username}}!</h1>
+
+        <div class="row mt-3">
+            <div class="col-md-6">
+                <h2>Your Orders</h2>
+                <canvas id="ordersChart"></canvas>
+            </div>
+            <div class="col-md-6">
+                <h2>Your Products</h2>
+                <canvas id="productsChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Orders Data
+        const orders = {{{json orders}}};
+        const ordersLabels = orders.map(order => order.item);
+        const ordersData = orders.map(order => order.quantity);
+
+        // Products Data
+        const products = {{{json products}}};
+        const productsLabels = products.map(product => product.name);
+        const productsData = products.map(product => product.quantity);
+
+        // Orders Chart
+        const ctxOrders = document.getElementById('ordersChart').getContext('2d');
+        new Chart(ctxOrders, {
+            type: 'bar',
+            data: {
+                labels: ordersLabels,
+                datasets: [{
+                    label: 'Quantity of Orders',
+                    data: ordersData,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Products Chart
+        const ctxProducts = document.getElementById('productsChart').getContext('2d');
+        new Chart(ctxProducts, {
+            type: 'bar',
+            data: {
+                labels: productsLabels,
+                datasets: [{
+                    label: 'Quantity of Products',
+                    data: productsData,
+                    backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

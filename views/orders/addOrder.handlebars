@@ -1,0 +1,17 @@
+{{!< main}}
+<h1 class="mb-4">New Order</h1>
+<form action="/orders/add" method="POST">
+    <div class="form-group">
+        <label for="item">Item</label>
+        <input type="text" id="item" name="item" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <input type="number" id="quantity" name="quantity" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="status">Status</label>
+        <input type="text" id="status" name="status" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-success">Add Order</button>
+</form>
